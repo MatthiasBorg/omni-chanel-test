@@ -131,7 +131,51 @@
       // Add your actual chat initialization logic here
       alert("Chat started (placeholder)");
     }
-  </script>
+    function initEmbeddedMessaging() {
+  		try {
+        const userData = handleForm();
 
+        window.addEventListener("onEmbeddedMessagingReady", () => {
+          console.log("onEmbeddedMessagingReady event");
+          console.log('SET PRE CHAT...');
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+              "AdditionalInformation": userData.additionalInformation,
+              "BreadcrumbsTrail": userData.breadcrumbTrail,
+              "CacheCookies": userData.cacheCookies,
+              "Category": userData.category,
+              "UUID": userData.uuid,
+              "Country": userData.country,
+              "Email": userData.email,
+              "Entity": userData.entity,
+              "FirstName": userData.firstName,
+              "Issue": userData.issue,
+              "Label": userData.label,
+              "Origin": userData.origin,
+              "Language": userData.language,
+              "LastName": userData.lastName,
+              "Product": userData.product,
+              "Question": userData.question,
+              "UserApp": userData.userApp,
+              "UserLoginStatus": userData.userLoginStatus,
+              "Username": userData.username
+          });
+        });
+        
+  			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+  
+  			embeddedservice_bootstrap.init(
+  				'00DQI00000D3IRA',
+  				'OmniChannelTest',
+  				'https://tipico--helpcentre.sandbox.my.site.com/ESWOmniChannelTest1749361605474',
+  				{
+  					scrt2URL: 'https://tipico--helpcentre.sandbox.my.salesforce-scrt.com'
+  				}
+  			);
+  		} catch (err) {
+  			console.error('Error loading Embedded Messaging: ', err);
+  		}
+  	};
+  </script>
+  <script type='text/javascript' src='https://tipico--helpcentre.sandbox.my.site.com/ESWOmniChannelTest1749361605474/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 </body>
 </html>
